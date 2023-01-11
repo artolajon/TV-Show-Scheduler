@@ -1,0 +1,41 @@
+@font-face {
+    font-family: 'roboto';
+    src: url('./Roboto-Regular.ttf') format("truetype");
+}
+
+@font-face {
+    font-family: 'roboto';
+    src: url('./Roboto-Bold.ttf') format("truetype");
+    font-weight: bold;
+}
+
+* {
+    font-family: roboto;
+}
+body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+form{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    
+}
+
+input, select{
+    margin-bottom: 1rem;
+    &[type=number]{
+        text-align: end;
+    }
+}
+
+form:not(.active){
+    display: none;
+}
+
+#result p{
+    display: flex;
+    flex-direction: column;
+}

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Serie Calendar Generator</title>
+  </head>
+  <body>
+    <main>
+      <h1>Serie Calendar Generator</h1>
+      <form id="form-title" class="active">
+        <h2>Title</h2>
+        <input type="text" name="serie-title" placeholder="Breaking Bad T5" required>
+        <input type="submit" value="Next">
+      </form>
+      <form id="form-episodes">
+        <h2>Episodes</h2>
+        <input type="number" name="episode-number" placeholder="16" required>
+        <span>Viewed</span>
+        <input type="number" name="episode-number-viewed" placeholder="0" >
+        <input type="submit" value="Next">
+      </form>
+      <form id="form-date">
+        <h2>Before</h2>
+        <input type="date" name="before-date" required>
+        <input type="submit" value="Next">
+      </form>
+      <form id="form-velocity">
+        <h2>Velocity</h2>
+        <span>
+          <input type="number" name="velocity" id="velocity" class="recalculate-trigger" placeholder="2" required>
+          /
+          <select name="periodicity" id="periodicity" class="recalculate-trigger" required>
+            <option value="day">Daily</option>
+            <option value="week">Weekly</option>
+          </select>
+        </span>
+        <div id="result">
+          <p>
+            <span id="result-title"></span>
+            <span id="result-episodes"></span>
+            <span id="result-marathon-dates"></span>
+            <span id="result-velocity"></span>
+            <span id="result-extra"></span>
+          </p>
+          <button id="generate" type="button">Generate calendar file</button>
+          <button id="reset" type="button">Reset</button>
+        </div>
+      </form>
+      
+    </main>
+  </body>
+</html>
