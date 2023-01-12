@@ -1,5 +1,5 @@
 {
-  "name": "serie-calendar-generator",
+  "name": "TV-Season-Rewatch-Scheduler",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "decimal.js": "^10.4.3",
+    "favicons-webpack-plugin": "^6.0.0",
     "ics": "^2.41.0"
   }
 }

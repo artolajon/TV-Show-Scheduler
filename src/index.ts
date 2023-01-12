@@ -1,6 +1,6 @@
-import { Functions } from './helpers/functions';
-import { Service } from './service';
-import './style.scss';
+import { Functions } from './app/helpers/functions';
+import { Service } from './app/service';
+import './app/style.scss';
 
 
 let service = new Service();
