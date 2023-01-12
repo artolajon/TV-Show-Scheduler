@@ -52,7 +52,7 @@ export class Service {
       }
 
       if (velocity>100){
-        throw "Too much episodes";
+        throw "Couldn't calculate";
       }
     }while(startDate == null);
 
@@ -92,7 +92,11 @@ export class Service {
     let data = this.currentData;
 
     let inputs = {
-        velocity: data.velocity.toString(),
+        "serie-title":data.title,
+        "episode-number":data.episodeNumber,
+        "episode-number-viewed":data.episodeNumberViewed,
+        "before-date":Functions.parseDateForInput(data.endDate),
+        velocity: data.velocity?.toString(),
         periodicity: data.periodicity
     };
 
@@ -135,6 +139,8 @@ export class Service {
         start: Functions.parseDateToArray(currentDay),
         end: Functions.parseDateToArray(end)
       })
+
+      currentDay.setDate(currentDay.getDate() - (data.periodicity == "week" ? 7:1));
     }
 
 

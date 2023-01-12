@@ -1,11 +1,11 @@
 export class MarathonData{
-    title: string;
-    episodeNumber: number;
-    episodeNumberViewed: number;
-    endDate: Date;
-    startDate: Date;
-    velocity: number;
-    periodicity: string;
-    extra: number;
-    duration:number;
+    title: string = null;
+    episodeNumber: number = null;
+    episodeNumberViewed: number = null;
+    endDate: Date= null;
+    startDate: Date= null;
+    velocity: number= null;
+    periodicity: string= null;
+    extra: number= null;
+    duration:number= null;
 }
