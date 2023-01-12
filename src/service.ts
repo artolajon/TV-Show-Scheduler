@@ -130,17 +130,19 @@ export class Service {
     let data = this.currentData;
 
     let events =[];
-    let currentDay = data.endDate;
-    for(let i = data.episodeNumber; i>data.episodeNumberViewed;i--){
-      events.unshift({
-        title: `${data.title} ${i}`,
-        start: Functions.parseDateToArray(currentDay),
-        end: Functions.parseDateToArray(currentDay, true)
-      })
-
-      currentDay.setDate(currentDay.getDate() - (data.periodicity == "week" ? 7:1));
+    let currentDay = data.startDate;
+    let currentEpisode = data.episodeNumberViewed;
+    while(events.length < data.episodeNumber - data.episodeNumberViewed){
+      for(let i = 0; i < data.velocity; i++){
+        currentEpisode++;
+        events.push({
+          title: `${data.title} ${currentEpisode}`,
+          start: Functions.parseDateToArray(currentDay),
+          end: Functions.parseDateToArray(currentDay, true)
+        })
+      }
+      currentDay.setDate(currentDay.getDate() + (data.periodicity == "week" ? 7:1));
     }
-
 
     const { error, value } = createEvents(events as EventAttributes[]);
 
