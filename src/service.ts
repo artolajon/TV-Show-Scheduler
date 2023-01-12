@@ -149,7 +149,7 @@ export class Service {
     this.downloadFile({
       mimeType: 'text/calendar',
       fileContents: value,
-      fileName: 'episodes.ics',
+      fileName: data.title+'.ics',
   })
   }
 
