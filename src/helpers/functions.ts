@@ -33,15 +33,19 @@ export class Functions {
         }
         return null;
     }
-    static parseDateToArray(date: Date): number[]{
+    static parseDateToArray(date: Date, isEnd = false): number[]{
         if (date){
             let year = date.getFullYear();
-            let month = date.getMonth();
+            let month = date.getMonth()+1;
             let day = date.getDate();
 
             
-
-            return [year, month, day, 0,0];
+            if (isEnd){
+                return [year, month, day, 23,0];
+            }else{
+                return [year, month, day, 22,0];
+            }
+            
         }
         return null;
     }

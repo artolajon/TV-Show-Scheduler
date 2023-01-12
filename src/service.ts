@@ -132,12 +132,10 @@ export class Service {
     let events =[];
     let currentDay = data.endDate;
     for(let i = data.episodeNumber; i>data.episodeNumberViewed;i--){
-      let end = new Date(currentDay);
-      end.setDate(end.getDate() + 1);
       events.unshift({
         title: `${data.title} ${i}`,
         start: Functions.parseDateToArray(currentDay),
-        end: Functions.parseDateToArray(end)
+        end: Functions.parseDateToArray(currentDay, true)
       })
 
       currentDay.setDate(currentDay.getDate() - (data.periodicity == "week" ? 7:1));
