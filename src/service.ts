@@ -134,7 +134,7 @@ export class Service {
     for(let i = data.episodeNumber; i>data.episodeNumberViewed;i--){
       let end = new Date(currentDay);
       end.setDate(end.getDate() + 1);
-      events.push({
+      events.unshift({
         title: `${data.title} ${i}`,
         start: Functions.parseDateToArray(currentDay),
         end: Functions.parseDateToArray(end)
