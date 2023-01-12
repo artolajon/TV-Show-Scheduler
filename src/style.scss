@@ -11,11 +11,15 @@
 
 * {
     font-family: roboto;
+    color: white;
 }
 body{
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: #181a1b;
+    margin: 0;
+    height: 100vh;
 }
 form{
     display: flex;
@@ -46,6 +50,7 @@ input:not([type="submit"]), select {
     padding: 10px;
     margin-bottom: 20px;
     font-size: 18px;
+    background-color: transparent;
     &:focus {
         border-bottom: 2px solid #0288d1;
         outline: none;
