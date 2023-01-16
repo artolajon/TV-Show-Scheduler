@@ -21,11 +21,17 @@ body{
     margin: 0;
     height: 100vh;
 }
+h1{
+    text-align: center;
+}
 form{
     display: flex;
     flex-direction: column;
     text-align: center;
-    
+    align-items: center;
+    &:not(.active){
+        display: none;
+    }
 }
 
 input, select{
@@ -33,27 +39,17 @@ input, select{
     &[type=number]{
         text-align: end;
     }
-}
-
-form:not(.active){
-    display: none;
-}
-
-#result p{
-    display: flex;
-    flex-direction: column;
-}
-
-input:not([type="submit"]), select {
-    border: none;
-    border-bottom: 2px solid #333;
-    padding: 10px;
-    margin-bottom: 20px;
-    font-size: 18px;
-    background-color: transparent;
-    &:focus {
-        border-bottom: 2px solid #0288d1;
-        outline: none;
+    &:not([type="submit"]){
+        border: none;
+        border-bottom: 2px solid #333;
+        padding: 10px;
+        margin-bottom: 20px;
+        font-size: 18px;
+        background-color: transparent;
+        &:focus {
+            border-bottom: 2px solid #0288d1;
+            outline: none;
+        }
     }
 }
 
@@ -69,4 +65,9 @@ button, input[type="submit"] {
     &:hover {
         background-color: #03a9f4;
     }
+}
+
+#result p{
+    display: flex;
+    flex-direction: column;
 }
