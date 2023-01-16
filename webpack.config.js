@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
+const ManifestPlugin = require('webpack-manifest-plugin');
 
 module.exports = {
   mode: 'development',
@@ -44,7 +45,26 @@ module.exports = {
       template: './src/index.html',
       filename: 'index.html'
     }),
-    new FaviconsWebpackPlugin('./src/favicon.ico')
+    new FaviconsWebpackPlugin('./src/favicon.ico'),
+    new ManifestPlugin.WebpackManifestPlugin({
+      fileName: 'manifest.json',
+      publicPath: 'dist/',
+      basePath: 'dist/',
+      writeToFileEmit: true,
+      seed: {
+        "name": "TV Show Scheduler",
+        "short_name": "TVShowScheduler",
+        "start_url": "/index.html",
+        "display": "standalone",
+        "icons": [
+          {
+            "src": "assets/favicon.ico",
+            "sizes": "64x64",
+            "type": "image/x-icon"
+          }
+        ]
+      }
+    })
 
   ]
 };
