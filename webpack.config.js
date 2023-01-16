@@ -58,13 +58,6 @@ module.exports = {
         "display": "standalone",
         "theme_color": "#ffffff",
         "background_color": "#181a1b",
-        "icons": [
-          {
-            "src": "assets/favicon.ico",
-            "sizes": "64x64",
-            "type": "image/x-icon"
-          }
-        ]
       }
     })
 
