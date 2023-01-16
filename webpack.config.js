@@ -56,6 +56,8 @@ module.exports = {
         "short_name": "TVShowScheduler",
         "start_url": "/index.html",
         "display": "standalone",
+        "theme_color": "#ffffff",
+        "background_color": "#181a1b",
         "icons": [
           {
             "src": "assets/favicon.ico",
