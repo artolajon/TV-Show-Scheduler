@@ -59,7 +59,7 @@ export class Service {
     this.currentData.periodicity = defaultPeriodicity == 7?"week":"day";
     this.currentData.startDate = startDate;
     this.currentData.velocity = velocity;
-    this.currentData.duration = duration;
+    this.currentData.duration = duration + 1;
     this.currentData.extra = extra;
 
     this.printData();
@@ -81,7 +81,7 @@ export class Service {
     let startDate = temporalStartDate;
    
     this.currentData.startDate = startDate;
-    this.currentData.duration = duration;
+    this.currentData.duration = duration + 1;
     this.currentData.extra = extra;
 
     this.printData();
