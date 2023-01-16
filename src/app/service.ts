@@ -39,11 +39,11 @@ export class Service {
     let duration, extra, startDate;
     do{
 
-      duration = Math.floor(new Decimal(episodeNumber).div(velocity).toNumber());
+      duration = Math.floor(new Decimal(episodeNumber).div(velocity).toNumber()) - 1;
       extra = new Decimal(episodeNumber).mod(velocity).toNumber();
       let requiredDays = new Decimal(duration).mul(defaultPeriodicity).toNumber();
       let temporalStartDate = new Date(this.currentData.endDate);
-      temporalStartDate.setDate(temporalStartDate.getDate() - Math.ceil(requiredDays));
+      temporalStartDate.setDate(temporalStartDate.getDate() - Math.ceil(requiredDays) );
 
       if (temporalStartDate>new Date()){
         startDate = temporalStartDate;
@@ -70,7 +70,7 @@ export class Service {
     let beforeDate = this.currentData.endDate;
     let velocity= this.currentData.velocity;
     let episodeNumber= this.currentData.episodeNumber - this.currentData.episodeNumberViewed;
-    let duration = Math.floor(new Decimal(episodeNumber).div(velocity).toNumber());
+    let duration = Math.floor(new Decimal(episodeNumber).div(velocity).toNumber()) - 1;
     let extra = new Decimal(episodeNumber).mod(velocity).toNumber();
 
     let requiredDays = new Decimal(duration).mul(periodicity).toNumber();
