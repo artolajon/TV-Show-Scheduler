@@ -15,7 +15,7 @@ A step by step series of examples that tell you how to get a development env run
 
 1. Clone the repository
 ```
-git clone https://github.com/artolajon/TV-Season-Rewatch-Scheduler.git
+git clone https://github.com/artolajon/TV-Show-Scheduler.git
 ```
 1. Install the required packages
 ```
