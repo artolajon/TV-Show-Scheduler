@@ -1,6 +1,8 @@
-# TV Season Rewatch Scheduler
-Welcome to the TV Season Rewatch Scheduler, with this webapp, you can easily generate a custom calendar that fits your rewatch schedule.
-
+# TV Show Scheduler
+Welcome to the TV Show Scheduler, with this webapp, you can easily generate a custom calendar that fits your rewatch schedule.
+## Usage
+Enter the show you want to rewatch, the number of episodes you want to watch and the date before you want to rewatch.
+The app will then create a calendar with a suggested episode schedule for you to follow.
 ## Getting Started
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
@@ -23,9 +25,6 @@ npm i
 ```
 npm run serve
 ```
-## Usage
-Enter the show you want to rewatch, the number of episodes you want to watch and the date before you want to rewatch.
-The app will then create a calendar with a suggested episode schedule for you to follow.
 
 ## License
 This project is licensed under the MIT License - see the LICENSE.md file for details
