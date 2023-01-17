@@ -2,6 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   mode: 'development',
@@ -21,11 +22,11 @@ module.exports = {
         exclude: /node_modules/,
       },
       {
-        test: /\.s[ac]ss$/i,
+        test: /\.scss$/i,
         use: [
-          "style-loader",
-          "css-loader",
-          "sass-loader",
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          'sass-loader',
         ],
       },
       {
@@ -39,7 +40,7 @@ module.exports = {
     ],
   },
   plugins: [
-
+    new MiniCssExtractPlugin(),
     new HtmlWebpackPlugin({
       inject: 'body',
       template: './src/index.html',
@@ -60,6 +61,6 @@ module.exports = {
         "background_color": "#181a1b",
       }
     })
-
+    
   ]
 };

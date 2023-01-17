@@ -1,9 +1,7 @@
 import { Functions } from './app/helpers/functions';
 import { Service } from './app/service';
-import { registerServiceWorker } from './app/service-worker';
 import './app/style.scss';
 
-registerServiceWorker();
 let service = new Service();
 
 service.createPagination();

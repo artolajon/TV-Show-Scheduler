@@ -28,6 +28,7 @@
   "dependencies": {
     "decimal.js": "^10.4.3",
     "favicons-webpack-plugin": "^6.0.0",
-    "ics": "^2.41.0"
+    "ics": "^2.41.0",
+    "mini-css-extract-plugin": "^2.7.2"
   }
 }
