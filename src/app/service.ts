@@ -19,50 +19,79 @@ export class Service {
         });
     }
     let resetButton = document.getElementById("reset");
-    resetButton.addEventListener("click", (e) => {
-      forms[forms.length-1].classList.remove("active");
-      forms[0].classList.add("active");
-
-      this.currentData = new MarathonData(); 
-      this.printData();
-    });
+    resetButton.addEventListener("click", (e) => this.reset());
 
   }
 
-  async calculateDefault(){
-    let availableDays = this.getAvailableDays(this.currentData.endDate);
-    
-    let defaultPeriodicity = availableDays > 14 ? 7:1;
-    let episodeNumber= this.currentData.episodeNumber - this.currentData.episodeNumberViewed;
+  reset(){
+    let forms = document.querySelectorAll("form");
+    forms[forms.length-1].classList.remove("active");
+    forms[0].classList.add("active");
 
-    let velocity=1;
-    let duration, extra, startDate;
-    do{
+    this.currentData = new MarathonData(); 
 
-      duration = Math.floor(new Decimal(episodeNumber).div(velocity).toNumber()) - 1;
-      extra = new Decimal(episodeNumber).mod(velocity).toNumber();
-      let requiredDays = new Decimal(duration).mul(defaultPeriodicity).toNumber();
-      let temporalStartDate = new Date(this.currentData.endDate);
-      temporalStartDate.setDate(temporalStartDate.getDate() - Math.ceil(requiredDays) );
-
-      if (temporalStartDate>new Date()){
-        startDate = temporalStartDate;
-      }else{
-        velocity++;
-      }
-
-      if (velocity>100){
-        throw "Couldn't calculate";
-      }
-    }while(startDate == null);
-
-    this.currentData.periodicity = defaultPeriodicity == 7?"week":"day";
-    this.currentData.startDate = startDate;
-    this.currentData.velocity = velocity;
-    this.currentData.duration = duration + 1;
-    this.currentData.extra = extra;
+    document.getElementById("result").classList.add("hide");
+    document.getElementById("error-message").classList.add("hide");
 
     this.printData();
+  }
+
+  addValidations(){
+    // Date
+    const today = new Date();
+    const tomorrow = new Date(today);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    let tomorrowStr = new Date().toISOString().split("T")[0];
+    document.getElementById("before-date").setAttribute("min", tomorrowStr); 
+
+    // Episode number
+    let episodeInput = document.getElementById("episode-number") as HTMLInputElement;
+    episodeInput.addEventListener("change", ()=>{
+      document.getElementById("episode-number-viewed").setAttribute("max", episodeInput.value); 
+    })
+    
+  }
+
+  async calculateDefault(){
+    try{
+      let availableDays = this.getAvailableDays(this.currentData.endDate);
+      
+      let defaultPeriodicity = availableDays > 14 ? 7:1;
+      let episodeNumber= this.currentData.episodeNumber - this.currentData.episodeNumberViewed;
+
+      let velocity=1;
+      let duration, extra, startDate;
+      do{
+
+        duration = Math.floor(new Decimal(episodeNumber).div(velocity).toNumber()) - 1;
+        extra = new Decimal(episodeNumber).mod(velocity).toNumber();
+        let requiredDays = new Decimal(duration).mul(defaultPeriodicity).toNumber();
+        let temporalStartDate = new Date(this.currentData.endDate);
+        temporalStartDate.setDate(temporalStartDate.getDate() - Math.ceil(requiredDays) );
+
+        if (temporalStartDate>new Date()){
+          startDate = temporalStartDate;
+        }else{
+          velocity++;
+        }
+
+        if (velocity>1000){
+          throw new Error("Couldn't calculate. Too much episodes");
+        }
+      }while(startDate == null);
+
+      this.currentData.periodicity = defaultPeriodicity == 7?"week":"day";
+      this.currentData.startDate = startDate;
+      this.currentData.velocity = velocity;
+      this.currentData.duration = duration + 1;
+      this.currentData.extra = extra;
+
+      this.printData();
+    }catch(error){
+      let message = 'Unknown Error';
+      if (error instanceof Error) message = error.message;
+      this.printError(message);
+    }
   }
 
   recalculate(){
@@ -117,9 +146,17 @@ export class Service {
       let span = document.getElementById(key);
       span.innerText = texts[key];
     });
+    document.getElementById("result").classList.remove("hide");
 
   }
 
+  printError(errorMessage: string)
+  {
+    console.error(errorMessage);
+    let errorBox = document.getElementById("error-message");
+    errorBox.innerText = errorMessage;
+    errorBox.classList.remove("hide");
+  } 
   getAvailableDays(endDate: Date) {
     let date1 = new Date();
     let difference = endDate.getTime() - date1.getTime();

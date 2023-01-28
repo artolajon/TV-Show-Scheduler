@@ -5,6 +5,7 @@ import './app/style.scss';
 let service = new Service();
 
 service.createPagination();
+service.addValidations();
 
 document.getElementById("form-title").addEventListener('submit',(e)=> {
   service.currentData.title = Functions.getDataFromForm(e, "serie-title");

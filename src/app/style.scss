@@ -38,6 +38,10 @@ input, select{
     margin-bottom: 1rem;
     &[type=number]{
         text-align: end;
+        width: 80%;
+        &.small{
+            width: 50%;
+        }
     }
     &:not([type="submit"]){
         border: none;
@@ -67,7 +71,14 @@ button, input[type="submit"] {
     }
 }
 
-#result p{
+#result{
     display: flex;
     flex-direction: column;
+}
+#error-message{
+    color: red;
+}
+
+.hide{
+    display: none;
 }
