@@ -2,7 +2,7 @@ import { Functions } from './app/helpers/functions';
 import { Service } from './app/service';
 import './app/style.scss';
 
-let service = new Service();
+const service = new Service();
 
 service.createPagination();
 service.addValidations();
@@ -13,7 +13,7 @@ document.getElementById("form-title").addEventListener('submit',(e)=> {
 
 document.getElementById("form-episodes").addEventListener('submit',(e)=> {
   service.currentData.episodeNumber = Functions.getDataFromForm(e, "episode-number");
-  let viewed: number = Functions.getDataFromForm(e, "episode-number-viewed");
+  const viewed: number = Functions.getDataFromForm(e, "episode-number-viewed");
   service.currentData.episodeNumberViewed = Number(viewed);
 })
 
@@ -25,7 +25,7 @@ document.getElementById("form-date").addEventListener('submit',(e)=> {
 document.querySelectorAll(".recalculate-trigger").forEach(input=>{
 
   input.addEventListener('change', (e)=>{
-    let inputEL = e.target as HTMLInputElement;
+    const inputEL = e.target as HTMLInputElement;
     if (inputEL.name=="velocity"){
       service.currentData.velocity =Number(inputEL.value);
     }else{
