@@ -8,7 +8,7 @@ export class Service {
   currentData:MarathonData = new MarathonData(); 
 
   createPagination(){
-    let forms = document.querySelectorAll("form");
+    const forms = document.querySelectorAll("form");
     for (let i = 0; i < forms.length; i++) {
         forms[i].addEventListener("submit", (e) => {
             e.preventDefault();
@@ -18,13 +18,13 @@ export class Service {
             }
         });
     }
-    let resetButton = document.getElementById("reset");
+    const resetButton = document.getElementById("reset");
     resetButton.addEventListener("click", (e) => this.reset());
 
   }
 
   reset(){
-    let forms = document.querySelectorAll("form");
+    const forms = document.querySelectorAll("form");
     forms[forms.length-1].classList.remove("active");
     forms[0].classList.add("active");
 
@@ -41,11 +41,11 @@ export class Service {
     const today = new Date();
     const tomorrow = new Date(today);
     tomorrow.setDate(tomorrow.getDate() + 1);
-    let tomorrowStr = new Date().toISOString().split("T")[0];
+    const tomorrowStr = new Date().toISOString().split("T")[0];
     document.getElementById("before-date").setAttribute("min", tomorrowStr); 
 
     // Episode number
-    let episodeInput = document.getElementById("episode-number") as HTMLInputElement;
+    const episodeInput = document.getElementById("episode-number") as HTMLInputElement;
     episodeInput.addEventListener("change", ()=>{
       document.getElementById("episode-number-viewed").setAttribute("max", episodeInput.value); 
     })
@@ -54,10 +54,10 @@ export class Service {
 
   async calculateDefault(){
     try{
-      let availableDays = this.getAvailableDays(this.currentData.endDate);
+      const availableDays = this.getAvailableDays(this.currentData.endDate);
       
-      let defaultPeriodicity = availableDays > 14 ? 7:1;
-      let episodeNumber= this.currentData.episodeNumber - this.currentData.episodeNumberViewed;
+      const defaultPeriodicity = availableDays > 14 ? 7:1;
+      const episodeNumber= this.currentData.episodeNumber - this.currentData.episodeNumberViewed;
 
       let velocity=1;
       let duration, extra, startDate;
@@ -65,8 +65,8 @@ export class Service {
 
         duration = Math.floor(new Decimal(episodeNumber).div(velocity).toNumber()) - 1;
         extra = new Decimal(episodeNumber).mod(velocity).toNumber();
-        let requiredDays = new Decimal(duration).mul(defaultPeriodicity).toNumber();
-        let temporalStartDate = new Date(this.currentData.endDate);
+        const requiredDays = new Decimal(duration).mul(defaultPeriodicity).toNumber();
+        const temporalStartDate = new Date(this.currentData.endDate);
         temporalStartDate.setDate(temporalStartDate.getDate() - Math.ceil(requiredDays) );
 
         if (temporalStartDate>new Date()){
@@ -95,19 +95,19 @@ export class Service {
   }
 
   recalculate(){
-    let periodicity = this.currentData.periodicity == "week" ? 7:1;
-    let beforeDate = this.currentData.endDate;
-    let velocity= this.currentData.velocity;
-    let episodeNumber= this.currentData.episodeNumber - this.currentData.episodeNumberViewed;
-    let duration = Math.floor(new Decimal(episodeNumber).div(velocity).toNumber()) - 1;
-    let extra = new Decimal(episodeNumber).mod(velocity).toNumber();
+    const periodicity = this.currentData.periodicity == "week" ? 7:1;
+    const beforeDate = this.currentData.endDate;
+    const velocity= this.currentData.velocity;
+    const episodeNumber= this.currentData.episodeNumber - this.currentData.episodeNumberViewed;
+    const duration = Math.floor(new Decimal(episodeNumber).div(velocity).toNumber()) - 1;
+    const extra = new Decimal(episodeNumber).mod(velocity).toNumber();
 
-    let requiredDays = new Decimal(duration).mul(periodicity).toNumber();
+    const requiredDays = new Decimal(duration).mul(periodicity).toNumber();
     
-    let temporalStartDate = new Date(beforeDate);
+    const temporalStartDate = new Date(beforeDate);
     temporalStartDate.setDate(temporalStartDate.getDate() - Math.ceil(requiredDays));
 
-    let startDate = temporalStartDate;
+    const startDate = temporalStartDate;
    
     this.currentData.startDate = startDate;
     this.currentData.duration = duration + 1;
@@ -118,9 +118,9 @@ export class Service {
 
 
   printData(){
-    let data = this.currentData;
+    const data = this.currentData;
 
-    let inputs = {
+    const inputs = {
         "serie-title":data.title,
         "episode-number":data.episodeNumber,
         "episode-number-viewed":data.episodeNumberViewed,
@@ -129,7 +129,7 @@ export class Service {
         periodicity: data.periodicity
     };
 
-    let texts = {
+    const texts = {
       "result-title": data.title,
       "result-episodes": `${data.episodeNumber} episodes (${data.episodeNumberViewed} viewed)`,
       "result-marathon-dates": `Marathon between ${Functions.parseDate(data.startDate)} and ${Functions.parseDate(data.endDate)}`,
@@ -138,12 +138,12 @@ export class Service {
     };
 
     Object.keys(inputs).forEach(key=>{
-      let input = document.getElementById(key) as HTMLInputElement;
+      const input = document.getElementById(key) as HTMLInputElement;
       input.value = inputs[key];
     });
 
     Object.keys(texts).forEach(key=>{
-      let span = document.getElementById(key);
+      const span = document.getElementById(key);
       span.innerText = texts[key];
     });
     document.getElementById("result").classList.remove("hide");
@@ -153,21 +153,21 @@ export class Service {
   printError(errorMessage: string)
   {
     console.error(errorMessage);
-    let errorBox = document.getElementById("error-message");
+    const errorBox = document.getElementById("error-message");
     errorBox.innerText = errorMessage;
     errorBox.classList.remove("hide");
   } 
   getAvailableDays(endDate: Date) {
-    let date1 = new Date();
-    let difference = endDate.getTime() - date1.getTime();
+    const date1 = new Date();
+    const difference = endDate.getTime() - date1.getTime();
     return Math.ceil(difference / (1000 * 3600 * 24));
   }
 
   generateFile(){
-    let data = this.currentData;
+    const data = this.currentData;
 
-    let events =[];
-    let currentDay = data.startDate;
+    const events =[];
+    const currentDay = data.startDate;
     let currentEpisode = data.episodeNumberViewed;
     while(events.length < data.episodeNumber - data.episodeNumberViewed){
       for(let i = 0; i < data.velocity; i++){
