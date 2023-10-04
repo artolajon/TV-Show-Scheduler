@@ -1,15 +1,15 @@
 export class Functions {
 
     static getDataFromForm<T>(e: SubmitEvent, name:string): T{
-        let formData = new FormData(e.target as HTMLFormElement); 
+        const formData = new FormData(e.target as HTMLFormElement); 
         return formData.get(name) as T;
     }
 
     static parseDate(date: Date): string{
         if (date){
-            let year = date.getFullYear();
-            let month = date.getMonth()+1;
-            let day = date.getDate();
+            const year = date.getFullYear();
+            const month = date.getMonth()+1;
+            const day = date.getDate();
 
             let result =`${day < 10 ? '0'+day:day}/${month < 10 ? '0'+month:month}`;
             if (year != new Date().getFullYear()){
@@ -23,11 +23,11 @@ export class Functions {
 
     static parseDateForInput(date: Date): string{
         if (date){
-            let year = date.getFullYear();
-            let month = date.getMonth()+1;
-            let day = date.getDate();
+            const year = date.getFullYear();
+            const month = date.getMonth()+1;
+            const day = date.getDate();
 
-            let result =`${year}-${month < 10 ? '0'+month:month}-${day < 10 ? '0'+day:day}`;
+            const result =`${year}-${month < 10 ? '0'+month:month}-${day < 10 ? '0'+day:day}`;
 
             return result;
         }
@@ -35,9 +35,9 @@ export class Functions {
     }
     static parseDateToArray(date: Date, isEnd = false): number[]{
         if (date){
-            let year = date.getFullYear();
-            let month = date.getMonth()+1;
-            let day = date.getDate();
+            const year = date.getFullYear();
+            const month = date.getMonth()+1;
+            const day = date.getDate();
 
             
             if (isEnd){
