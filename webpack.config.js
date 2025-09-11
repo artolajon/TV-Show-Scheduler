@@ -49,8 +49,8 @@ module.exports = {
     new FaviconsWebpackPlugin('./src/favicon.ico'),
     new ManifestPlugin.WebpackManifestPlugin({
       fileName: 'manifest.json',
-      publicPath: 'dist/',
-      basePath: 'dist/',
+      publicPath: '/',
+      basePath: '/',
       writeToFileEmit: true,
       seed: {
         "name": "TV Show Scheduler",
